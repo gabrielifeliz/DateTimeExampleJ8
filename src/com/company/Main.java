@@ -64,9 +64,16 @@ public class Main {
         // If user enters a date after today, prompt the user for a date on or before today and get it
         while (userDate.compareTo(rightNow.toLocalDate()) > 0) {
             System.out.println("Enter a date on or before today: ");
-            aDate = keyboard.nextLine();
-            // Convert String date to LocalDate date in dd/MM/yyyy format
-            userDate = LocalDate.parse(aDate, dTF);
+            try {
+                aDate = keyboard.nextLine();
+                // Convert String date to LocalDate date in dd/MM/yyyy format
+                userDate = LocalDate.parse(aDate, dTF);
+            } catch (DateTimeParseException e) {
+                System.out.print("Wrong format.\nTry re-entering a date in dd/MM/yyyy format (ex. 01/01/2018): ");
+                aDate = keyboard.nextLine();
+                // Convert String date to LocalDate date in dd/MM/yyyy format
+                userDate = LocalDate.parse(aDate, dTF);
+            }
         }
 
         // Display the date entered by the user in three different formats
